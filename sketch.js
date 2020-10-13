@@ -4,18 +4,27 @@ const colorPalette_2 = ["White", "Gray", "Gainsboro", "Silver", "DarkGrey"];
 let cols;
 let rws;
 
-const scl = 20;
-const w = 1400;
-const h = 1400;
-
+const scl = 10;
 let flying = 0;
 
 let grd = [];
 
+const s = 200;
+
 function setup() {
   console.log("Hello World!")
-
   createCanvas(windowWidth, windowHeight, WEBGL);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth,windowHeight)
+}
+
+function draw() {
+
+  let w = window.innerWidth/1.25;
+  let h = window.innerHeight/1.25;
+
   cols = w / scl;
   rws = h / scl;
 
@@ -25,14 +34,10 @@ function setup() {
       grd[x][y] = 1;
     }
   }
-}
-
-
-function draw() {
 
   noStroke();
 
-  flying += 0.1;
+  flying -= 0.1;
   let yoff = flying;
   for (let y = 0; y < rws; y++) {
     let xoff = 0;
@@ -43,10 +48,10 @@ function draw() {
     yoff += 0.2;
   }
 
-  rotateX(mouseY/scl);
-  rotateY(mouseX/scl);
+  rotateX(mouseY/s);
+  rotateY(mouseX/s);
 
-  translate(-w / 2, -h / 2);
+  translate(-w / 2, -h / 4);
 
 if(mouseX <= windowWidth/2){
   background(0);
